@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Predictions{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="mb-0"><i class="bi bi-graph-up"></i> Maintenance Predictions</h2>
+        <a href="{% url 'maintenance' %}" class="btn btn-warning">
+            <i class="bi bi-tools"></i> Go to Maintenance Page
+        </a>
+    </div>
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0"><i class="bi bi-bar-chart-line"></i> Latest Sensor Predictions</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Temperature (&deg;C)</th>
+                            <th>Temp Status</th>
+                            <th>Vibration</th>
+                            <th>Vibration Status</th>
+                            <th>Overall Condition</th>
+                            <th>Insights</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for prediction in predictions %}
+                        <tr>
+                            <td>{{ prediction.timestamp }}</td>
+                            <td>{{ prediction.temperature }}</td>
+                            <td>
+                                <span class="badge 
+                                    {% if prediction.temperature_status == 'Normal' %}bg-success
+                                    {% elif prediction.temperature_status == 'Warning' %}bg-warning
+                                    {% else %}bg-danger{% endif %}">
+                                    {{ prediction.temperature_status }}
+                                </span>
+                            </td>
+                            <td>{{ prediction.vibration }}</td>
+                            <td>
+                                <span class="badge 
+                                    {% if prediction.vibration_status == 'Normal' %}bg-success
+                                    {% elif prediction.vibration_status == 'Warning' %}bg-warning
+                                    {% else %}bg-danger{% endif %}">
+                                    {{ prediction.vibration_status }}
+                                </span>
+                            </td>
+                            <td>
+                                <span class="badge 
+                                    {% if prediction.overall_status == 'Normal' %}bg-success
+                                    {% elif prediction.overall_status == 'Warning' %}bg-warning
+                                    {% else %}bg-danger{% endif %}">
+                                    {{ prediction.overall_status }}
+                                </span>
+                            </td>
+                            <td>{{ prediction.insight }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="7" class="text-center text-muted">No predictions available.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

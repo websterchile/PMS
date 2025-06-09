@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+
+@layer components {
+  .card {
+    @apply bg-white p-6 rounded-lg shadow-card;
+  }
+  .btn-primary {
+    @apply bg-primary text-white px-4 py-2 rounded-md hover:bg-blue-800 transition;
+  }
+  .btn-secondary {
+    @apply bg-secondary text-white px-4 py-2 rounded-md hover:bg-amber-600 transition;
+  }
+}
+
+@tailwind utilities;

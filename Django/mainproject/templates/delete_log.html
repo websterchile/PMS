@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Delete Log{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <div class="alert alert-danger">
+        <h4>Are you sure you want to delete this log?</h4>
+        <ul>
+            <li><strong>Timestamp:</strong> {{ log.timestamp }}</li>
+            <li><strong>Pump ID:</strong> {{ log.pump_id }}</li>
+            <li><strong>Action:</strong> {{ log.action }}</li>
+        </ul>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Yes, Delete</button>
+            <a href="{% url 'logs' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Data Management{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h2><i class="bi bi-database-fill-gear"></i> Data Management</h2>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+    <div class="card mb-4">
+        <div class="card-header">Upload CSV Data</div>
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <input type="file" name="csv_upload" accept=".csv" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Upload CSV</button>
+            </form>
+        </div>
+    </div>
+    <div class="card mb-4">
+        <div class="card-header">Generate Synthetic Data</div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" name="generate_synthetic" class="btn btn-success">Generate Synthetic Data</button>
+            </form>
+        </div>
+    </div>
+    <div class="card mb-4">
+        <div class="card-header">Live Data (Coming Soon)</div>
+        <div class="card-body">
+            <p class="text-muted">Integration for live sensor data will be available here.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

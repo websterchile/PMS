@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Add Maintenance Log{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    {% if edit %}
+        <h2>Edit Maintenance Log</h2>
+    {% else %}
+        <h2>Add Maintenance Log</h2>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Add Log</button>
+        <a href="{% url 'logs' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

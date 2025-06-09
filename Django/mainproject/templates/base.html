@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Water Pump Maintenance{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            color: #1f2937;
+            min-height: 100vh;
+        }
+        .navbar {
+            background: #1e3a8a !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .navbar-brand, .nav-link {
+            color: #ffffff !important;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #10b981 !important;
+        }
+        .container {
+            max-width: 1200px;
+            animation: fadeIn 0.5s ease-in;
+        }
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+        .card-header {
+            background: #1e3a8a;
+            color: #ffffff;
+            border-radius: 12px 12px 0 0 !important;
+            font-weight: 600;
+        }
+        .btn-primary {
+            background: #1e3a8a;
+            border: none;
+            transition: background 0.3s ease;
+        }
+        .btn-primary:hover {
+            background: #3b82f6;
+        }
+        .btn-success {
+            background: #10b981;
+            border: none;
+        }
+        .btn-success:hover {
+            background: #059669;
+        }
+        .table th {
+            background: #1e3a8a;
+            color: #ffffff;
+        }
+        .table-hover tbody tr:hover {
+            background: #f9fafb;
+        }
+        .alert {
+            border-radius: 8px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .navbar-brand i {
+            margin-right: 6px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-primary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'index' %}">
+          <i class="bi bi-droplet-half"></i> Pump System
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="true" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNavbar">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link" href="{% url 'sensors' %}"><i class="bi bi-speedometer2"></i> Sensors</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'predictions' %}"><i class="bi bi-graph-up"></i> Predictions</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'maintenance' %}"><i class="bi bi-tools"></i> Maintenance</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'logs' %}"><i class="bi bi-journal-text"></i> Logs</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'data_management' %}"><i class="bi bi-database-fill-gear"></i> Data Management</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'help' %}"><i class="bi bi-question-circle"></i> Help & Docs</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container mt-5">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

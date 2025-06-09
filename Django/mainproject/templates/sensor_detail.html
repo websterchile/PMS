@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}{{ sensor_type|title }} Sensor Details{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-3">{{ sensor_type|title }} Sensor Details</h2>
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5>Status:</h5>
+            {% if sensor_type == "temperature" %}
+                <span class="badge bg-info">Normal</span>
+            {% elif sensor_type == "vibration" %}
+                <span class="badge bg-warning">Warning</span>
+            {% else %}
+                <span class="badge bg-secondary">Unknown</span>
+            {% endif %}
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            Recent {{ sensor_type|title }} Readings
+        </div>
+        <div class="card-body p-0">
+            <table class="table mb-0">
+                <thead>
+                    <tr>
+                        <th>Timestamp</th>
+                        {% if sensor_type == "temperature" %}
+                            <th>Temperature (°C)</th>
+                        {% elif sensor_type == "vibration" %}
+                            <th>Vibration (m/s²)</th>
+                        {% endif %}
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in sensor_data.itertuples %}
+                    <tr>
+                        <td>{{ row.timestamp }}</td>
+                        {% if sensor_type == "temperature" %}
+                            <td>{{ row.temperature }}</td>
+                        {% elif sensor_type == "vibration" %}
+                            <td>{{ row.vibration }}</td>
+                        {% endif %}
+                        <td>
+                            <span class="badge 
+                                {% if row.label == 'Normal' %}bg-success
+                                {% elif row.label == 'Warning' %}bg-warning
+                                {% else %}bg-danger{% endif %}">
+                                {{ row.label }}
+                            </span>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="3">No data available.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
